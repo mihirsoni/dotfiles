@@ -35,10 +35,13 @@ set title " Show the filename in the window titlebar
 set undofile " Persistent Undo
 set wildignore+=.DS_Store
 set wildignore+=*.jpg,*.jpeg,*.gif,*.png,*.gif,*.psd,*.o,*.obj,*.min.js
-set wildignore+=*/bower_components/*,*/node_modules/*,*/dist/*,*/static/* "This will be ingored 
+set wildignore+=*/bower_components/*,*/node_modules/*,*/dist/*,*/static/* "This will be ingore
 set wildmenu " Hitting TAB in command mode will show possible completions above command line
 set wildmode=list:longest " Complete only until point of ambiguity
 set winminheight=0 " Allow splits to be reduced to a single line
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
 " Strip trailing whitespace (,ss) {{{
 function! StripWhitespace () " {{{
@@ -173,7 +176,7 @@ augroup END
 augroup airline_config
   autocmd!
   let g:airline_powerline_fonts = 1
-  let g:airline_enable_syntastic = 1
+  let g:airline#extensions#syntastic#enabled = 1
   let g:airline#extensions#tabline#buffer_nr_format = '%s '
   let g:airline#extensions#tabline#buffer_nr_show = 1
   let g:airline#extensions#tabline#enabled = 1
@@ -218,10 +221,17 @@ augroup END
 
 " Syntastic.vim {{{
 augroup syntastic_config
-  autocmd!
+
+  highlight link SyntasticErrorSign SignColumn
+  highlight link SyntasticWarningSign SignColumn
+  highlight link SyntasticStyleErrorSign SignColumn
+  highlight link SyntasticStyleWarningSign SignColumn
+  let g:syntastic_check_on_wq = 1
+  let g:syntastic_auto_loc_list = 1
   let g:syntastic_error_symbol = '✗'
   let g:syntastic_warning_symbol = '⚠'
-  let g:syntastic_javascript_checkers = ['eslint']
+  let g:syntastic_javascript_checkers = []
+  autocmd FileType javascript let b:syntastic_checkers = findfile('.eslintrc', '.;') !=# '' ? ['eslint'] : []
 augroup END
 " }}}
 
@@ -244,7 +254,6 @@ Plug 'mxw/vim-jsx'
 Plug 'mhartington/oceanic-next'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'othree/yajs.vim'
-Plug 'pangloss/vim-javascripto'
 Plug 'rking/ag.vim'
 Plug 'tpope/vim-fugitive' "Manage Git commands from VIM
 Plug 'tpope/vim-markdown',     { 'for': 'markdown' }
@@ -260,9 +269,6 @@ Plug 'wavded/vim-stylus',      { 'for': 'stylus' }
 Plug 'Xuyuanp/nerdtree-git-plugin' " This will enable highlight of GIT within nerd tree
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
-
-
-
 call plug#end()
 
 
