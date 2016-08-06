@@ -53,7 +53,7 @@ function! StripWhitespace () " {{{
 endfunction " }}}
 noremap <leader>ss :call StripWhitespace ()<CR>
 " }}}
-
+map <C-n> :NERDTreeToggle<CR>
 " Fix page up and down {{{
 map <PageUp> <C-U>
 map <PageDown> <C-D>
@@ -226,21 +226,28 @@ augroup syntastic_config
   highlight link SyntasticWarningSign SignColumn
   highlight link SyntasticStyleErrorSign SignColumn
   highlight link SyntasticStyleWarningSign SignColumn
+  let g:syntastic_mode_map = { 'mode': 'active',
+                              \ 'active_filetypes': ['python', 'javascript'],
+                              \ 'passive_filetypes': [] }
+  let g:syntastic_javascript_eslint_exe = 'npm run lint --'
+  "let g:syntastic_javascript_eslint_exec = 'eslint'
+  let g:syntastic_check_on_open = 0
   let g:syntastic_check_on_wq = 1
+  let g:syntastic_check_on_w = 0 
   let g:syntastic_auto_loc_list = 1
+  let g:syntastic_always_populate_loc_list = 1
   let g:syntastic_error_symbol = '✗'
   let g:syntastic_warning_symbol = '⚠'
-  let g:syntastic_javascript_checkers = []
-  autocmd FileType javascript let b:syntastic_checkers = findfile('.eslintrc', '.;') !=# '' ? ['eslint'] : []
+  let g:syntastic_javascript_checkers = ['eslint']
 augroup END
 " }}}
 
-" JSX.vim {{{
+" jsx.vim {{{
 augroup jsx_config
   autocmd!
-  let g:jsx_ext_required = 0
+  let g:jsx_ext_required =0
 augroup END
-" }}}
+" }}
 
 call plug#begin('~/.vim/plugged')
 Plug 'ap/vim-css-color'
@@ -265,6 +272,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/jade.vim',   { 'for': 'jade' }
 Plug 'vim-scripts/SyntaxComplete'
+Plug 'vim-scripts/AutoComplPop'
 Plug 'wavded/vim-stylus',      { 'for': 'stylus' }
 Plug 'Xuyuanp/nerdtree-git-plugin' " This will enable highlight of GIT within nerd tree
 Plug 'xolox/vim-misc'
