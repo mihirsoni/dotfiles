@@ -2,7 +2,8 @@ rking files
 .vim/viminfo
 .vim/swaps/*
 .vim/undo
-
+.extras*
+*.un~
 # git credential file
 .gitconfig.local
 

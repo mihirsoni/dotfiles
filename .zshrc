@@ -1,11 +1,12 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/mihir/.oh-my-zsh
+
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="mihir"
+ZSH_THEME="robbyrussell"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -49,13 +50,11 @@ ZSH_THEME="mihir"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git common-aliases jira tmux jsontools sudo web-search)
+plugins=(git common-aliases jira jsontools sudo web-search)
 
 # User configuration
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-export ANDROID_HOME="/Users/mihir/Library/Android/sdk/"
-export PATH="/Applications/play-2.2.3/:$PATH"
 export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools"
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -86,11 +85,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #Play Development
-alias plogs='tail -f /Users/mihir/quikr_work/quikrServicesAPI/logs/PlatformService/application.log'
-alias play='play debug -Dmode=dev'
 alias cleanupDS='find . -type f -name "*.DS_Store" -ls -delete'
-alias stageJenkins='open http://192.168.124.43:8080/'
-alias prodJenkins='open http://192.168.124.60:8080/'
-alias stageQc='open http://192.168.124.51:3000/services/interior-design-in-bangalore-test'
-alias prodQc=''
 
+#Add extra file
+source ~/dotfiles/.extras
