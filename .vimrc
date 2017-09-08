@@ -279,5 +279,3 @@ Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
 Plug 'leafgarland/typescript-vim'
 call plug#end()
-
-
