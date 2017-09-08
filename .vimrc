@@ -157,10 +157,10 @@ augroup END
 
 " }}}
 " XML {{{
-augroup filetype_xml
-  autocmd!
-  au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
-augroup END
+"augroup filetype_xml
+ " autocmd!
+  " au FileType xml exe :silent 1,$!xmllint --format --recover - 2>/dev/null
+"augroup END
 " }}}
 
 " ZSH {{{
@@ -277,6 +277,7 @@ Plug 'wavded/vim-stylus',      { 'for': 'stylus' }
 Plug 'Xuyuanp/nerdtree-git-plugin' " This will enable highlight of GIT within nerd tree
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
+Plug 'leafgarland/typescript-vim'
 call plug#end()
 
 
