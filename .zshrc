@@ -22,43 +22,38 @@ source ~/antigen.zsh
 
 antigen use oh-my-zsh
 
-local b="antigen-bundle"
-
-# Guess what to install when running an unknown command.
-$b command-not-found
+local b="antigen bundle"
 
 # Helper for extracting different types of archives.
-$b extract
+antigen bundle extract
 
 # homebrew  - autocomplete on `brew install`
-$b brew
-$b brew-cask
+antigen bundle brew
+antigen bundle brew-cask
 
 # install oh-my-zsh plugins
-$b robbyrussell/oh-my-zsh plugins/z
-$b robbyrussell/oh-my-zsh plugins/git
-$b robbyrussell/oh-my-zsh plugins/sudo
-$b robbyrussell/oh-my-zsh plugins/common-aliases
-
-
+antigen bundle robbyrussell/oh-my-zsh plugins/z
+antigen bundle robbyrussell/oh-my-zsh plugins/git
+antigen bundle robbyrussell/oh-my-zsh plugins/sudo
+antigen bundle robbyrussell/oh-my-zsh plugins/common-aliases
 
 # nicoulaj's moar completion files for zsh -- not sure why disabled.
-# $b zsh-users/zsh-completions src
+# antigen bundle zsh-users/zsh-completions src
 
 # Syntax highlighting on the readline
-$b zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-syntax-highlighting
 
 # history search
-$b zsh-users/zsh-history-substring-search ./zsh-history-substring-search.zsh
+antigen bundle zsh-users/zsh-history-substring-search ./zsh-history-substring-search.zsh
 
 # suggestions
-$b zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-autosuggestions
 
 # colors for all files!
-$b trapd00r/zsh-syntax-highlighting-filetypes
+antigen bundle trapd00r/zsh-syntax-highlighting-filetypes
 
 # dont set a theme, because pure does it all
-$b mafredri/zsh-async
+antigen bundle mafredri/zsh-async
 
 antigen theme agnoster
 
@@ -96,7 +91,16 @@ setopt share_history
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 
+function iterm2_print_user_vars() {
+  iterm2_set_user_var gitBranch $((git branch 2> /dev/null) | grep \* | cut -c3-)
+  #iterm2_set_user_var gitRepo $((git remote show origin 2> /dev/null) | grep "Fetch URL:" | cut -c14-)
+}
+
 # User configuration
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/mihson/bin:"
 export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools"
+export PATH="/apollo/env/SDETools/bin:$PATH"
+export PATH="$HOME/.yarn/bin:$PATH"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
