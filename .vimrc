@@ -8,9 +8,9 @@ syntax on
 colorscheme OceanicNext
 " }}}
 " Local directories {{{
-set backupdir=~/.vim/backups
-set directory=~/.vim/swaps
-set undodir=~/.vim/undo
+    set backupdir=~/.vim/backups
+    set directory=~/.vim/swaps
+    set undodir=~/.vim/undos
 " }}}
 
 set nu
@@ -176,7 +176,7 @@ augroup END
 augroup airline_config
   autocmd!
   let g:airline_powerline_fonts = 1
-  let g:airline#extensions#syntastic#enabled = 1
+  let g:airline#extensions#ale#enabled = 1
   let g:airline#extensions#tabline#buffer_nr_format = '%s '
   let g:airline#extensions#tabline#buffer_nr_show = 1
   let g:airline#extensions#tabline#enabled = 1
@@ -219,26 +219,16 @@ augroup rainbow_parenthesis_config
 augroup END
 " }}}
 
-" Syntastic.vim {{{
-augroup syntastic_config
-
-  highlight link SyntasticErrorSign SignColumn
-  highlight link SyntasticWarningSign SignColumn
-  highlight link SyntasticStyleErrorSign SignColumn
-  highlight link SyntasticStyleWarningSign SignColumn
-  let g:syntastic_mode_map = { 'mode': 'active',
-                              \ 'active_filetypes': ['python', 'javascript'],
-                              \ 'passive_filetypes': [] }
-  let g:syntastic_javascript_eslint_exe = 'npm run lint --'
-  "let g:syntastic_javascript_eslint_exec = 'eslint'
-  let g:syntastic_check_on_open = 0
-  let g:syntastic_check_on_wq = 1
-  let g:syntastic_check_on_w = 0 
-  let g:syntastic_auto_loc_list = 1
-  let g:syntastic_always_populate_loc_list = 1
-  let g:syntastic_error_symbol = '✗'
-  let g:syntastic_warning_symbol = '⚠'
-  let g:syntastic_javascript_checkers = ['eslint']
+" Ale.vim {{{
+augroup ale_config
+  let g:ale_sign_error = '✗'
+  let g:ale_sign_warning = '⚠'
+  let g:ale_lint_on_enter = 0
+  let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'],
+      \ 'javascript': ['prettier', 'eslint']
+  \ }
+  let g:ale_completion_enabled = 1
+  let g:ale_sign_column_always = 1
 augroup END
 " }}}
 
@@ -258,7 +248,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/goyo.vim'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'pangloss/vim-javascript'
-Plug 'w0rp/ale'
+Plug 'w0rp/ale' "Async Linting
 Plug 'skywind3000/asyncrun.vim'
 Plug 'mxw/vim-jsx'
 Plug 'mhartington/oceanic-next'
@@ -269,7 +259,6 @@ Plug 'tpope/vim-fugitive' "Manage Git commands from VIM
 Plug 'tpope/vim-markdown',     { 'for': 'markdown' }
 Plug 'tpope/vim-repeat'
 Plug 'scrooloose/nerdtree' "This will install tree for vim
-Plug 'scrooloose/syntastic' "This will enable sysnstaic for JS eslint
 Plug 'scrooloose/nerdcommenter'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'

@@ -98,6 +98,5 @@ function iterm2_print_user_vars() {
 
 # User configuration
 
-export PATH="~/Library/Python/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/mihson/bin:"
-export PATH="$HOME/.yarn/bin:$PATH"
+export PATH="~/Library/Python/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.yarn/bin:/Users/$(whoami)/bin:$PATH"
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
