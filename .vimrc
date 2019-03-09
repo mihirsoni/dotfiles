@@ -281,4 +281,6 @@ Plug 'Xuyuanp/nerdtree-git-plugin' " This will enable highlight of GIT within ne
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
 Plug 'leafgarland/typescript-vim'
+Plug 'johngrib/vim-game-snake'
+
 call plug#end()

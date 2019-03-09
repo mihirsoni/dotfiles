@@ -98,9 +98,6 @@ function iterm2_print_user_vars() {
 
 # User configuration
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/mihson/bin:"
-export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools"
-export PATH="/apollo/env/SDETools/bin:$PATH"
+export PATH="~/Library/Python/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/mihson/bin:"
 export PATH="$HOME/.yarn/bin:$PATH"
-
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
