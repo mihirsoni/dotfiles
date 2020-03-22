@@ -8,7 +8,7 @@
 
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-files=".vimrc .zshrc .vim/colors"    # list of files/folders to symlink in homedir
+files=".vimrc .zshrc .vim/colors .vim/backups .vim/swaps .vim/undos"    # list of files/folders to symlink in homedir
 
 ##########
 
@@ -21,12 +21,15 @@ echo "...done"
 echo "Changing to the $dir directory"
 cd $dir
 echo "...done"
+
 #download required plugins
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+if [ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ] ; then
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+fi
 
-git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
-
-#ew from brew-cask
+if [ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ] ; then
+    git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+fi
 
 #Smart jumping to directories 
 brew install autojump

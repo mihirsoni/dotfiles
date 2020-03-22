@@ -1,5 +1,8 @@
 export PATH=$HOME/bin:$HOME/.toolbox/bin:$PATH
 export ZSH="$HOME/.oh-my-zsh"
+#Add extra file
+source ~/dotfiles/.extras
+source ~/dotfiles/.aliases
  
 ZSH_THEME="powerlevel9k/powerlevel9k"
 POWERLEVEL9K_MODE="nerdfont-complete"
@@ -58,6 +61,7 @@ alias vv="vi ~/.vimrc"
 # COWS=${COWS%??}
 # RANDOMCOW=$(echo -e $COWS | gsort -R | head -1)
 # $FORTUNE -s | cowsay -f $RANDOMCOW | lolcat
+
 # Automatically list directory contents on `cd`.
 auto-ls () {
   emulate -L zsh;
@@ -68,3 +72,7 @@ auto-ls () {
 export PATH=$HOME/bin:$HOME/.toolbox/bin:$PATH
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
