@@ -1,102 +1,70 @@
-DEFAULT_USER=`whoami`
-
-#Add extra file
-source ~/dotfiles/.extras
-source ~/dotfiles/.aliases
-
-
-# history
-SAVEHIST=100000
-
-# vim bindings
-bindkey -v
-
-
-# antigen time!
-source ~/antigen.zsh
-
-######################################################################
-### install some antigen bundles
-
-#Try to get rid of this
-
-antigen use oh-my-zsh
-
-local b="antigen bundle"
-
-# Helper for extracting different types of archives.
-antigen bundle extract
-
-# homebrew  - autocomplete on `brew install`
-antigen bundle brew
-antigen bundle brew-cask
-
-# install oh-my-zsh plugins
-antigen bundle robbyrussell/oh-my-zsh plugins/z
-antigen bundle robbyrussell/oh-my-zsh plugins/git
-antigen bundle robbyrussell/oh-my-zsh plugins/sudo
-antigen bundle robbyrussell/oh-my-zsh plugins/common-aliases
-
-# nicoulaj's moar completion files for zsh -- not sure why disabled.
-# antigen bundle zsh-users/zsh-completions src
-
-# Syntax highlighting on the readline
-antigen bundle zsh-users/zsh-syntax-highlighting
-
-# history search
-antigen bundle zsh-users/zsh-history-substring-search ./zsh-history-substring-search.zsh
-
-# suggestions
-antigen bundle zsh-users/zsh-autosuggestions
-
-# colors for all files!
-antigen bundle trapd00r/zsh-syntax-highlighting-filetypes
-
-# dont set a theme, because pure does it all
-antigen bundle mafredri/zsh-async
-
-antigen theme agnoster
-
-export PS2="⚡ "
-
-# Tell antigen that you're done.
-antigen apply
-
-###
-#################################################################################################
-
-
-# bind UP and DOWN arrow keys for history search
-zmodload zsh/terminfo
-bindkey "$terminfo[kcuu1]" history-substring-search-up
-bindkey "$terminfo[kcud1]" history-substring-search-down
-
-export PURE_GIT_UNTRACKED_DIRTY=0
-
+export PATH=$HOME/bin:$HOME/.toolbox/bin:$PATH
+export ZSH="$HOME/.oh-my-zsh"
+ 
+ZSH_THEME="powerlevel9k/powerlevel9k"
+POWERLEVEL9K_MODE="nerdfont-complete"
+POWERLEVEL9K_DISABLE_RPROMPT=false
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon user dir_writable dir vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs time)
+#POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
+POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{014}\u2570%F{cyan}\uF460%F{073}\uF460%F{109}\uF460%f "
+POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
+POWERLEVEL9K_TIME_FORMAT="%D{%H:%M}"
+POWERLEVEL9K_SHORTEN_STRATEGY="truncate_to_unique"
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
+POWERLEVEL9K_USER_ICON="\uF415" # 
+POWERLEVEL9K_ROOT_ICON="\uF09C"
+POWERLEVEL9K_SUDO_ICON=$'\uF09C' # 
+POWERLEVEL9K_VCS_GIT_ICON='\uF408 '
+POWERLEVEL9K_VCS_GIT_GITHUB_ICON='\uF408 '
+ 
+ZSH_DISABLE_COMPFIX=true
+ENABLE_CORRECTION="true"
+COMPLETION_WAITING_DOTS="true"
+# DISABLE_AUTO_TITLE="true"
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+ 
+plugins=(
+  git
+  iterm2
+  macports
+  man
+  osx
+  python
+  composer
+  zsh-syntax-highlighting
+  zsh-autosuggestions
+)
+ 
+source $ZSH/oh-my-zsh.sh
+ 
+# ssh
+export SSH_KEY_PATH="~/.ssh/rsa_id"
+ 
+# alias
+alias suroot='sudo -E -s'
+alias ez="vi ~/.zshrc"
+alias rz="source ~/.zshrc"
+alias vv="vi ~/.vimrc"
+# require fortune, cowsay and lolcat
+# random cows speak fortune
+# FORTUNE="fortune"
+# for COWNAME in `cowsay -l | tail -n+3`
+# do
+# COWS+=$COWNAME
+# COWS+='\n'
+# done
+# COWS=${COWS%??}
+# RANDOMCOW=$(echo -e $COWS | gsort -R | head -1)
+# $FORTUNE -s | cowsay -f $RANDOMCOW | lolcat
 # Automatically list directory contents on `cd`.
 auto-ls () {
   emulate -L zsh;
   # explicit sexy ls'ing as aliases arent honored in here.
   hash gls >/dev/null 2>&1 && CLICOLOR_FORCE=1 gls -aFh --color --group-directories-first || ls
 }
-chpwd_functions=( auto-ls $chpwd_functions )
 
+export PATH=$HOME/bin:$HOME/.toolbox/bin:$PATH
 
-# history mgmt
-# http://www.refining-linux.org/archives/49/ZSH-Gem-15-Shared-history/
-setopt inc_append_history
-setopt share_history
-
-
-zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-
-
-function iterm2_print_user_vars() {
-  iterm2_set_user_var gitBranch $((git branch 2> /dev/null) | grep \* | cut -c3-)
-  #iterm2_set_user_var gitRepo $((git remote show origin 2> /dev/null) | grep "Fetch URL:" | cut -c14-)
-}
-
-# User configuration
-
-export PATH="~/Library/Python/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.yarn/bin:/Users/$(whoami)/bin:$PATH"
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"

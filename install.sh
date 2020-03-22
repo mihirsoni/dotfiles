@@ -21,11 +21,23 @@ echo "...done"
 echo "Changing to the $dir directory"
 cd $dir
 echo "...done"
+#download required plugins
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+
+git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+
+#ew from brew-cask
+
+#Smart jumping to directories 
+brew install autojump
+#tldr for commands man pages.
+brew install tldr
+brew install howdoi
 
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks
 for file in $files; do
     echo "Moving any existing dotfiles from ~ to $olddir"
-    mv ~/.$file ~/dotfiles_old/
+    mv ~/$file ~/dotfiles_old/
     echo "Creating symlink to $file in home directory."
     ln -sf $dir/$file ~/$file
 done
