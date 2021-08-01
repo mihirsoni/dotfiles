@@ -10,7 +10,8 @@ export ZSH="$HOME/.oh-my-zsh"
 #Add extra file
 source ~/dotfiles/.extras
 source ~/dotfiles/.aliases
- 
+setopt HIST_IGNORE_SPACE
+setopt HIST_IGNORE_ALL_DUPS
 ZSH_THEME="powerlevel10k/powerlevel10k"
 POWERLEVEL9K_MODE="nerdfont-complete"
 POWERLEVEL9K_DISABLE_RPROMPT=false
@@ -88,3 +89,4 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+export PATH="/usr/local/opt/curl-openssl/bin:$PATH"

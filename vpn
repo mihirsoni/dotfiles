@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# always the case for me
+U2F_PREFIX=eiifcckjdeke
+
+if [[ ${BASH_ARGV[0]} =~ ^$U2F_PREFIX ]]; then
+    # loads 'Midway' from osx login keychain
+    MIDWAY_PASS=$(security find-generic-password -s Midway -w)
+
+    printf "\n\n${MIDWAY_PASS}${BASH_ARGV[0]}\n" | /opt/cisco/anyconnect/bin/vpn -s connect "Automatic Selection (Route53)"
+else
+    # useful for other commands:
+    #    vpn state
+    #    vpn disconnect
+    /opt/cisco/anyconnect/bin/vpn $*
+fi
+
